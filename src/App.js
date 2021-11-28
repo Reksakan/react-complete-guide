@@ -25,7 +25,12 @@ const App = () => {
     },
   ];
 
-//Alternative without JSX
+  const addExpenseHandler = (expense) => {
+    console.log('In App.js')
+    console.log(expense)
+  }
+
+  //Alternative without JSX
   // return React.createElement(
   //   'div', 
   //   {},
@@ -35,7 +40,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler}/>
       <Expenses expenses={expenses}/>
     </div>
   );
