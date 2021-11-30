@@ -1,10 +1,13 @@
 import { useState} from 'react';
 import './ExpenseForm.css';
+import Card from '../UI/Card';
 
 const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState('')
   const [enteredAmount, setEnteredAmount] = useState('')
   const [enteredDate, setEnteredDate] = useState('')
+  const [toggleForm, setToggleForm] = useState(true)
+  
   // const [userInput, setUserInput] = useState({
   //   enteredTitle: '',
   //   enteredAmount: '',
@@ -52,8 +55,24 @@ const ExpenseForm = (props) => {
     setEnteredTitle('')
     setEnteredAmount('')
     setEnteredDate('')
+    setToggleForm(!toggleForm)
   }
 
+  const toggleModal = () => {
+    setEnteredTitle('')
+    setEnteredAmount('')
+    setEnteredDate('')
+    setToggleForm(!toggleForm)
+  }
+
+  if (!toggleForm) {
+    return (
+      <Card>
+        <button onClick={toggleModal}>Add New Expense</button>
+      </Card>
+    )
+  }
+ 
   return (
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
@@ -72,6 +91,7 @@ const ExpenseForm = (props) => {
       </div>
       <div className="new-expense__actions">
         <button type='submit'>Add Expense</button>
+        <button type='button' onClick={toggleModal}>Cancel</button>
       </div>
     </form>
   )
